@@ -11,17 +11,17 @@
 <body>
   <main class="app">
     <header class="site-header">
-      <div class="brand-mark" aria-hidden="true">⚔</div>
+      <div class="brand-mark" aria-hidden="true"><i data-lucide="swords"></i></div>
       <h1>CHRONIQUES MARTIALES</h1>
       <p class="subtitle">GÉNÉRATEUR NARRATIF DE COMBAT</p>
       <p class="tagline">LES CHRONIQUES S'ÉCRIVENT DANS LE SANG</p>
     </header>
 
     <nav class="tabs" aria-label="Catégories principales">
-      <button class="tab active" data-tab="combat"><span class="tab-icon">⚔</span><span>Combat</span></button>
-      <button class="tab" data-tab="blessures"><span class="tab-icon">♡</span><span>Blessures</span></button>
-      <button class="tab" data-tab="finisseurs"><span class="tab-icon">☠</span><span>Finisseurs</span></button>
-      <button class="tab" data-tab="creatures"><span class="tab-icon">♟</span><span>Créatures</span></button>
+      <button class="tab active" data-tab="combat"><span class="tab-icon"><i data-lucide="swords"></i></span><span>Combat</span></button>
+      <button class="tab" data-tab="blessures"><span class="tab-icon"><i data-lucide="heart-crack"></i></span><span>Blessures</span></button>
+      <button class="tab" data-tab="finisseurs"><span class="tab-icon"><i data-lucide="skull"></i></span><span>Finisseurs</span></button>
+      <button class="tab" data-tab="creatures"><span class="tab-icon"><i data-lucide="paw-print"></i></span><span>Créatures</span></button>
     </nav>
 
     <section id="actions" class="actions" aria-live="polite"></section>
@@ -33,7 +33,7 @@
       </div>
       <p id="result" class="result" aria-live="polite">Les chroniques attendent que le premier sang soit versé…</p>
       <div class="result-actions">
-        <button id="copy" class="secondary-button" type="button">▣ &nbsp; Copier</button>
+        <button id="copy" class="secondary-button" type="button"><i data-lucide="copy"></i> Copier</button>
         <span id="copy-status" class="copy-status" role="status"></span>
       </div>
     </section>
@@ -51,5 +51,60 @@
     <footer>UN OUTIL POUR LE MAÎTRE DU JEU</footer>
   </main>
   <script src="script.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    // Remplace les caractères Unicode du moteur par les pictogrammes Lucide.
+    const actionIcons = {
+      "Attaque réussie": "sword",
+      "Attaque critique": "swords",
+      "Attaque ratée": "target",
+      "Esquive réussie": "move-right",
+      "Parade réussie": "shield-check",
+      "Défense ratée": "shield-x",
+      "Blessure légère": "heart",
+      "Blessure sérieuse": "heart-crack",
+      "Blessure grave": "heart-pulse",
+      "Blessure mortelle": "skull",
+      "Adversaire terrassé": "swords",
+      "Coup fatal": "zap",
+      "Exécution": "skull",
+      "Dernier souffle": "wind",
+      "Aberration": "eye",
+      "Bête": "paw-print",
+      "Artificiel": "cog",
+      "Dragon": "flame",
+      "Mort-vivant": "skull",
+      "Plante": "sprout"
+    };
+
+    function refreshLucideIcons() {
+      if (!window.lucide) return;
+      document.querySelectorAll('.action-button').forEach(button => {
+        const label = button.querySelector('.action-label')?.textContent.trim();
+        const iconName = actionIcons[label];
+        const iconSlot = button.querySelector('.action-icon');
+        if (iconName && iconSlot && iconSlot.dataset.lucideReady !== 'true') {
+          iconSlot.textContent = '';
+          iconSlot.innerHTML = `<i data-lucide="${iconName}"></i>`;
+          iconSlot.dataset.lucideReady = 'true';
+        }
+      });
+      window.lucide.createIcons();
+    }
+
+    const iconObserver = new MutationObserver(refreshLucideIcons);
+    iconObserver.observe(document.getElementById('actions'), { childList: true, subtree: true });
+    refreshLucideIcons();
+  </script>
+  <style>
+    [data-lucide], .brand-mark svg, .tab-icon svg, .action-icon svg, .secondary-button svg {
+      width: 1em; height: 1em; vertical-align: middle;
+      stroke-width: 1.8;
+    }
+    .brand-mark svg { width: 36px; height: 36px; }
+    .tab-icon svg { width: 23px; height: 23px; }
+    .action-icon svg { width: 29px; height: 29px; }
+    .secondary-button { display: inline-flex; align-items: center; gap: 7px; }
+  </style>
 </body>
 </html>
