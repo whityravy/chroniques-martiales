@@ -44,6 +44,21 @@ const content = {
         "Votre arme ne rencontre que le vide. L'adversaire esquive et reprend son équilibre.",
         "Votre coup siffle dans l'air avant de frapper le sol dans un bruit métallique.",
         "Votre adversaire se dérobe au dernier instant. Votre attaque ne laisse qu'une entaille dans le décor."
+      ]},
+      { label: "Distance touchée", icon: "➶", lines: [
+        "Votre projectile file à travers le tumulte et frappe sa cible avec un claquement sec.",
+        "La flèche trouve son chemin jusqu'à l'adversaire. Celui-ci vacille sous l'impact.",
+        "Votre tir atteint sa cible. Un cri bref se perd dans le fracas du combat."
+      ]},
+      { label: "Distance ratée", icon: "➶", lines: [
+        "Votre projectile siffle dans l'air et va se perdre au loin sans atteindre sa cible.",
+        "Le tir passe à côté. Le projectile frappe le sol ou se brise contre un obstacle dans un claquement sec.",
+        "Votre adversaire se dérobe et votre projectile poursuit sa course dans le vide."
+      ]},
+      { label: "Distance critique", icon: "➶", lines: [
+        "Votre projectile fend l'air avec une précision implacable et frappe un point vital.",
+        "Le trait atteint sa cible avec une violence exceptionnelle. L'adversaire s'effondre presque sous le choc.",
+        "Votre tir trouve une ouverture parfaite et transperce les défenses de votre ennemi."
       ]}
     ]},
     { title: "DÉFENSES", items: [
@@ -88,6 +103,7 @@ const content = {
 
   const actionIcons = {
     'Attaque réussie':'sword','Attaque critique':'swords','Attaque ratée':'target',
+    'Distance touchée':'target','Distance ratée':'wind','Distance critique':'zap',
     'Esquive réussie':'paw','Parade réussie':'shield','Défense ratée':'shield',
     'Blessure légère':'heart','Blessure sérieuse':'heartCrack','Blessure grave':'heartCrack','Blessure mortelle':'skull',
     'Adversaire terrassé':'swords','Coup fatal':'zap','Exécution':'skull','Dernier souffle':'wind',
@@ -102,6 +118,93 @@ const content = {
   // Moteur narratif : les textes sont composés à partir de fragments adaptés
   // à chaque action. Aucun résultat mécanique n'est décidé par le générateur.
   const narrativeProfiles = {
+    'Distance touchée': {
+      openings: [
+        "Vous ajustez votre visée et relâchez votre projectile",
+        "Votre flèche fend l'air dans un sifflement aigu",
+        "D'un geste rapide, vous décochez votre tir",
+        "Votre projectile traverse le tumulte du combat",
+        "Vous profitez d'une ouverture pour lâcher votre trait"
+      ],
+      impacts: [
+        "et atteint sa cible dans un bruit mat",
+        "et se fiche dans la chair de votre adversaire",
+        "et frappe l'ennemi avec une précision redoutable",
+        "et l'impact fait vaciller votre cible",
+        "et un cri de douleur couvre un instant le vacarme"
+      ],
+      reactions: [
+        "L'adversaire porte instinctivement la main à sa blessure.",
+        "Il chancelle et tente de retrouver ses appuis.",
+        "Sa posture se brise sous la douleur.",
+        "Il tourne brusquement la tête vers vous, cherchant l'origine du tir.",
+        "Le projectile reste fiché dans sa cible tandis que le combat fait rage."
+      ],
+      endings: [
+        "Vous avez déjà porté votre attention sur la suite de l'affrontement.",
+        "Le tumulte reprend aussitôt autour de vous.",
+        "Votre arme est prête pour le prochain tir.",
+        "La distance ne vous a pas empêché de faire couler le sang."
+      ]
+    },
+    'Distance critique': {
+      openings: [
+        "Vous prenez une fraction de seconde pour ajuster votre visée et relâchez votre projectile",
+        "Votre trait fuse dans les airs avec une vitesse fulgurante",
+        "Vous décochez un tir d'une précision redoutable",
+        "Votre projectile traverse le tumulte et trouve une ouverture infime",
+        "Profitant d'un instant de vulnérabilité, vous libérez votre tir"
+      ],
+      impacts: [
+        "et frappe un point vital avec une précision terrifiante",
+        "et se plante profondément dans une zone sans protection",
+        "et transperce la défense adverse dans un impact brutal",
+        "et atteint sa cible avec une force dévastatrice",
+        "et l'impact arrache un cri qui domine le vacarme du combat"
+      ],
+      reactions: [
+        "L'adversaire se plie sous le choc, le souffle coupé.",
+        "Ses forces semblent l'abandonner tandis qu'il porte la main à sa blessure.",
+        "Il chancelle lourdement, incapable de masquer la douleur.",
+        "Son regard se trouble et sa posture s'effondre.",
+        "La violence du coup le laisse un instant sans réaction."
+      ],
+      endings: [
+        "Autour de vous, le combat continue sans attendre.",
+        "Vous préparez déjà votre prochain geste.",
+        "Le silence d'un instant est bientôt englouti par le fracas des armes.",
+        "Votre tir vient de marquer les esprits autant que la chair."
+      ]
+    },
+    'Distance ratée': {
+      openings: [
+        "Vous décochez votre projectile, mais votre cible se déplace au dernier instant",
+        "Votre trait fend l'air dans un sifflement avant de dévier de sa trajectoire",
+        "Vous lâchez votre tir, mais l'adversaire a déjà quitté votre ligne de mire",
+        "Votre projectile traverse le champ de bataille sans trouver sa cible",
+        "Vous profitez d'une ouverture et relâchez votre tir"
+      ],
+      impacts: [
+        "Le projectile se perd dans le vide.",
+        "Il frappe le sol dans un bruit sec.",
+        "Le trait ricoche contre la pierre et disparaît dans le tumulte.",
+        "Votre tir passe à quelques doigts de votre adversaire.",
+        "Le projectile se fiche dans le bois ou la pierre derrière sa cible."
+      ],
+      reactions: [
+        "Votre adversaire profite de cet instant pour se repositionner.",
+        "Vous devez déjà préparer un nouveau tir.",
+        "La cible reste hors d'atteinte et garde les yeux fixés sur vous.",
+        "Un bref instant suffit à votre adversaire pour reprendre l'initiative.",
+        "Le combat ne vous laisse aucun répit pour corriger votre visée."
+      ],
+      endings: [
+        "Vous ramenez votre attention sur le champ de bataille.",
+        "Le sifflement du projectile se perd dans le vacarme.",
+        "Il faudra trouver une meilleure ouverture.",
+        "Votre adversaire est toujours debout, prêt à poursuivre l'affrontement."
+      ]
+    },
     'Attaque réussie': {
       openings: [
         "Vous engagez votre poids dans le mouvement",
