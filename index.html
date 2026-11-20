@@ -50,56 +50,44 @@
 
     <footer>UN OUTIL POUR LE MAÎTRE DU JEU</footer>
   </main>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
   <script src="script.js"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
   <script>
-    // Remplace les caractères Unicode du moteur par les pictogrammes Lucide.
-    const actionIcons = {
-      "Attaque réussie": "sword",
-      "Attaque critique": "swords",
-      "Attaque ratée": "target",
-      "Esquive réussie": "move-right",
-      "Parade réussie": "shield-check",
-      "Défense ratée": "shield-x",
-      "Blessure légère": "heart",
-      "Blessure sérieuse": "heart-crack",
-      "Blessure grave": "heart-pulse",
-      "Blessure mortelle": "skull",
-      "Adversaire terrassé": "swords",
-      "Coup fatal": "zap",
-      "Exécution": "skull",
-      "Dernier souffle": "wind",
-      "Aberration": "eye",
-      "Bête": "paw-print",
-      "Artificiel": "cog",
-      "Dragon": "flame",
-      "Mort-vivant": "skull",
-      "Plante": "sprout"
-    };
+    // Icônes Lucide : remplacement visuel des caractères du moteur, sans modifier script.js.
+    (function () {
+      const icons = {
+        "Attaque réussie": "sword", "Attaque critique": "swords", "Attaque ratée": "target",
+        "Esquive réussie": "move-right", "Parade réussie": "shield-check", "Défense ratée": "shield-x",
+        "Blessure légère": "heart", "Blessure sérieuse": "heart-crack", "Blessure grave": "heart-pulse",
+        "Blessure mortelle": "skull", "Adversaire terrassé": "swords", "Coup fatal": "zap",
+        "Exécution": "skull", "Dernier souffle": "wind", "Aberration": "eye", "Bête": "paw-print",
+        "Artificiel": "cog", "Dragon": "flame", "Mort-vivant": "skull", "Plante": "sprout"
+      };
 
-    function refreshLucideIcons() {
-      if (!window.lucide) return;
-      document.querySelectorAll('.action-button').forEach(button => {
-        const label = button.querySelector('.action-label')?.textContent.trim();
-        const iconName = actionIcons[label];
-        const iconSlot = button.querySelector('.action-icon');
-        if (iconName && iconSlot && iconSlot.dataset.lucideReady !== 'true') {
-          iconSlot.textContent = '';
-          iconSlot.innerHTML = `<i data-lucide="${iconName}"></i>`;
-          iconSlot.dataset.lucideReady = 'true';
-        }
-      });
-      window.lucide.createIcons();
-    }
+      function drawIcons() {
+        if (!window.lucide || typeof window.lucide.createIcons !== "function") return;
+        document.querySelectorAll(".action-button").forEach(function (button) {
+          const label = button.querySelector(".action-label");
+          const slot = button.querySelector(".action-icon");
+          if (!label || !slot) return;
+          const name = icons[label.textContent.trim()];
+          if (!name || slot.getAttribute("data-icon-name") === name) return;
+          slot.setAttribute("data-icon-name", name);
+          slot.innerHTML = "<i data-lucide=\"" + name + "\"></i>";
+        });
+        window.lucide.createIcons();
+      }
 
-    const iconObserver = new MutationObserver(refreshLucideIcons);
-    iconObserver.observe(document.getElementById('actions'), { childList: true, subtree: true });
-    refreshLucideIcons();
+      drawIcons();
+      const target = document.getElementById("actions");
+      if (target && window.MutationObserver) {
+        new MutationObserver(drawIcons).observe(target, { childList: true, subtree: true });
+      }
+    })();
   </script>
   <style>
     [data-lucide], .brand-mark svg, .tab-icon svg, .action-icon svg, .secondary-button svg {
-      width: 1em; height: 1em; vertical-align: middle;
-      stroke-width: 1.8;
+      width: 1em; height: 1em; vertical-align: middle; stroke-width: 1.8;
     }
     .brand-mark svg { width: 36px; height: 36px; }
     .tab-icon svg { width: 23px; height: 23px; }
