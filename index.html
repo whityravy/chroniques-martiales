@@ -1,55 +1,23 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#100e0b">
-  <title>Chroniques Martiales — Générateur narratif de combat</title>
-  <meta name="description" content="Générateur narratif de combat pour le maître du jeu.">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <main class="app">
-    <header class="site-header">
-      <div class="brand-mark" aria-hidden="true">⚔</div>
-      <h1>CHRONIQUES MARTIALES</h1>
-      <p class="subtitle">GÉNÉRATEUR NARRATIF DE COMBAT</p>
-      <p class="tagline">LES CHRONIQUES S'ÉCRIVENT DANS LE SANG</p>
-    </header>
-
-    <nav class="tabs" aria-label="Catégories principales">
-      <button class="tab active" data-tab="combat"><span class="tab-icon">⚔</span><span>Combat</span></button>
-      <button class="tab" data-tab="blessures"><span class="tab-icon">♡</span><span>Blessures</span></button>
-      <button class="tab" data-tab="finisseurs"><span class="tab-icon">☠</span><span>Finisseurs</span></button>
-      <button class="tab" data-tab="creatures"><span class="tab-icon">♟</span><span>Créatures</span></button>
-    </nav>
-
-    <section id="actions" class="actions" aria-live="polite"></section>
-
-    <section class="chronicle">
-      <div class="section-heading">
-        <span>CHRONIQUE DU COMBAT</span>
-        <span class="ornament" aria-hidden="true">✦</span>
-      </div>
-      <p id="result" class="result" aria-live="polite">Les chroniques attendent que le premier sang soit versé…</p>
-      <div class="result-actions">
-        <button id="copy" class="secondary-button" type="button">▣ &nbsp; Copier</button>
-        <span id="copy-status" class="copy-status" role="status"></span>
-      </div>
-    </section>
-
-    <section class="history">
-      <div class="history-heading">
-        <h2>DERNIÈRES CHRONIQUES</h2>
-        <button id="clear-history" class="text-button" type="button">Effacer</button>
-      </div>
-      <ol id="history-list" class="history-list">
-        <li class="empty-history">Aucune action pour le moment.</li>
-      </ol>
-    </section>
-
-    <footer>UN OUTIL POUR LE MAÎTRE DU JEU</footer>
-  </main>
-  <script src="script.js"></script>
-</body>
-</html>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#100e0b">
+<title>Chroniques Martiales — Générateur narratif de combat</title><meta name="description" content="Générateur narratif de combat pour le maître du jeu."><link rel="stylesheet" href="style.css">
+<style>
+.icon-svg{width:1.35em;height:1.35em;display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.brand-mark .icon-svg{width:38px;height:38px;margin:auto}.tab-icon .icon-svg{width:25px;height:25px}.action-icon .icon-svg{width:30px;height:30px}.secondary-button .icon-svg{width:16px;height:16px}
+.action-button[aria-pressed="true"]{border-color:#d6b77e;background:#302518;box-shadow:0 0 0 1px rgba(214,183,126,.2),0 0 18px rgba(189,146,81,.12)}
+button:focus-visible{outline:2px solid #d6b77e;outline-offset:3px}
+</style></head>
+<body><main class="app">
+<header class="site-header"><div class="brand-mark" aria-hidden="true" id="brand-icon"></div><h1>CHRONIQUES MARTIALES</h1><p class="subtitle">GÉNÉRATEUR NARRATIF DE COMBAT</p><p class="tagline">LES CHRONIQUES S'ÉCRIVENT DANS LE SANG</p></header>
+<nav class="tabs" aria-label="Catégories principales">
+<button class="tab active" type="button" data-tab="combat" aria-pressed="true"><span class="tab-icon" data-icon="swords"></span><span>Combat</span></button>
+<button class="tab" type="button" data-tab="blessures" aria-pressed="false"><span class="tab-icon" data-icon="heart-crack"></span><span>Blessures</span></button>
+<button class="tab" type="button" data-tab="finisseurs" aria-pressed="false"><span class="tab-icon" data-icon="skull"></span><span>Finisseurs</span></button>
+<button class="tab" type="button" data-tab="creatures" aria-pressed="false"><span class="tab-icon" data-icon="paw"></span><span>Créatures</span></button>
+</nav>
+<section id="actions" class="actions" aria-label="Actions disponibles"></section>
+<section class="chronicle"><div class="section-heading"><span>CHRONIQUE DU COMBAT</span><span class="ornament" aria-hidden="true">✦</span></div><p id="result" class="result" aria-live="polite">Les chroniques attendent que le premier sang soit versé…</p><div class="result-actions"><button id="copy" class="secondary-button" type="button"><span data-icon="copy"></span> Copier</button><span id="copy-status" class="copy-status" role="status" aria-live="polite"></span></div></section>
+<section class="history"><div class="history-heading"><h2>DERNIÈRES CHRONIQUES</h2><button id="clear-history" class="text-button" type="button">Effacer</button></div><ol id="history-list" class="history-list"><li class="empty-history">Aucune action pour le moment.</li></ol></section><footer>UN OUTIL POUR LE MAÎTRE DU JEU</footer>
+</main><script src="script.js" defer></script></body></html>
