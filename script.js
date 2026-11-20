@@ -455,6 +455,127 @@ const content = {
     }
   };
 
+
+  // Enrichissement narratif : nouvelles variations pour éviter les scènes interchangeables.
+  // Le moteur reste descriptif et ne décide jamais des conséquences mécaniques.
+  const narrativeEnhancements = {
+    'Attaque réussie': {
+      openings: ["Vous feintez d'un mouvement de l'épaule avant de changer brusquement d'angle", "Vous attendez que son arme s'écarte, puis vous vous engouffrez dans l'ouverture", "Votre pas chasse la distance et votre attaque jaillit sans prévenir", "Vous détournez son attention d'un geste bref avant de porter votre coup"],
+      impacts: ["et votre tranchant ouvre une ligne rouge sur son flanc", "et l'acier heurte sa protection avant de trouver la chair", "et le coup frappe sous sa garde dans un claquement brutal", "et votre arme entame sa défense dans un choc qui résonne jusque dans vos épaules"],
+      reactions: ["Il serre les dents et tente de masquer sa douleur derrière une nouvelle garde.", "Sa respiration se fait irrégulière ; son regard revient aussitôt vers vous.", "Il perd un instant le fil de l'échange, juste assez pour mesurer votre avantage.", "Une trace sombre s'étend sur son vêtement tandis qu'il réajuste sa posture."],
+      endings: ["Vous ne lui laissez pas le loisir de reprendre pleinement l'initiative.", "Le prochain échange se jouera avant même que l'écho du choc ne s'éteigne.", "Autour de vous, les cris et le fracas des armes couvrent déjà le bruit de l'impact."]
+    },
+    'Attaque critique': {
+      openings: ["Vous lisez son mouvement avant même qu'il ne l'achève", "Dans un éclair de lucidité, vous abandonnez toute retenue et frappez", "Vous brisez le rythme de l'affrontement par une attaque fulgurante", "Votre regard trouve la faille ; votre corps s'y engouffre avec une précision implacable"],
+      impacts: ["et votre arme traverse sa défense dans un fracas brutal", "et le coup s'abat avec une force qui semble faire trembler le sol", "et l'acier frappe avec une précision chirurgicale, là où la protection ne couvre plus rien", "et l'impact déchire le silence comme un coup de tonnerre"],
+      reactions: ["Sa posture se disloque et son arme manque de lui échapper.", "Il reste un instant figé, incapable de répondre à la violence du coup.", "Son visage se contracte ; toute assurance a disparu de son regard.", "Ses appuis cèdent et il doit lutter pour ne pas s'effondrer."],
+      endings: ["Pendant un battement de cœur, votre adversaire ne semble plus voir que vous.", "La brutalité de l'échange laisse les combattants proches suspendus un instant.", "Vous venez de prendre l'ascendant, mais le combat n'a pas encore livré son verdict."]
+    },
+    'Attaque ratée': {
+      openings: ["Vous amorcez une feinte, mais votre adversaire ne mord pas", "Votre attaque part avec un instant de retard", "Vous cherchez à forcer le passage et votre mouvement devient trop prévisible", "Votre lame décrit un large arc, mais la cible a déjà changé de place"],
+      impacts: ["L'acier ne fait que griffer la pierre dans une pluie d'étincelles.", "Votre arme frappe le vide et votre élan vous entraîne trop loin.", "Le coup s'écrase contre un bouclier présenté au dernier instant.", "Votre pointe passe à côté et ne laisse qu'un souffle dans son sillage."],
+      reactions: ["L'adversaire a désormais une vue nette sur votre flanc découvert.", "Il profite de votre mouvement pour se replacer hors de portée.", "Vous devez rompre votre élan et reconstruire votre garde.", "Son regard suit votre arme ; il a compris votre intention."],
+      endings: ["La moindre hésitation pourrait lui offrir une ouverture.", "Vous reprenez vos appuis tandis que l'affrontement se poursuit.", "Le temps de corriger votre erreur, votre adversaire est déjà en mouvement."]
+    },
+    'Distance touchée': {
+      openings: ["Vous retenez votre souffle, alignez votre cible et libérez le trait", "Profitant d'un intervalle entre deux combattants, vous décochez", "Votre bras se tend et le projectile quitte la corde dans un claquement sec", "Vous ajustez votre tir au milieu du tumulte"],
+      impacts: ["et le projectile se fiche dans la cible avec un bruit sourd", "et la pointe trouve une ouverture entre deux pièces d'armure", "et le trait frappe avec une netteté presque sèche", "et l'impact arrache un sursaut à votre adversaire"],
+      reactions: ["La cible porte la main à l'endroit frappé sans vous quitter des yeux.", "Son mouvement se brise, mais elle demeure dans le combat.", "Un bref cri se perd parmi les clameurs du champ de bataille.", "Le projectile tremble encore tandis que l'adversaire cherche à vous repérer."],
+      endings: ["Vous avez déjà une main prête à saisir un nouveau projectile.", "La distance vous protège encore, mais votre position est désormais connue.", "Le combat ne vous accorde qu'un instant avant le prochain mouvement."]
+    },
+    'Distance critique': {
+      openings: ["Vous attendez l'instant exact où la cible se découvre", "Votre visée se fixe sur une faille minuscule et vous relâchez le tir", "Vous ne cherchez pas la vitesse, mais le point juste", "Au cœur du chaos, votre geste demeure parfaitement maîtrisé"],
+      impacts: ["et le projectile frappe avec une précision foudroyante", "et le trait traverse la protection à l'endroit le plus vulnérable", "et la pointe se plante profondément dans sa cible", "et le tir atteint un point exposé avec une violence sèche"],
+      reactions: ["L'adversaire se plie sous le choc, incapable de dissimuler l'atteinte.", "Son geste s'interrompt net et son regard se vide un instant.", "Il chancelle, sa défense entièrement désorganisée.", "La douleur lui arrache un cri qui domine brièvement le vacarme."],
+      endings: ["Votre précision vient de transformer l'équilibre de l'affrontement.", "Le silence d'une fraction de seconde est aussitôt englouti par le tumulte.", "Vous avez frappé juste ; à présent, tout dépendra de la suite du combat."]
+    },
+    'Distance ratée': {
+      openings: ["Vous relâchez votre tir au moment où la cible rompt sa trajectoire", "Le projectile quitte votre arme, mais votre adversaire change brusquement d'appui", "Vous décochez dans l'ouverture qui se referme déjà", "Votre tir fend l'espace entre les combattants"],
+      impacts: ["Le trait ricoche contre la pierre et disparaît dans la poussière.", "Le projectile se plante dans le bois derrière sa cible.", "La flèche frôle une épaule avant de poursuivre sa course.", "Votre tir se perd au-dessus de la mêlée."],
+      reactions: ["Votre adversaire a repéré votre position et tourne son attention vers vous.", "L'occasion est passée ; il vous faut déjà retrouver une ligne de tir.", "La cible poursuit son mouvement sans ralentir.", "Vous sentez que le prochain tir exigera une meilleure ouverture."],
+      endings: ["Le claquement du tir se dissout dans le vacarme.", "Vous réajustez votre position tandis que la mêlée se déplace.", "La bataille ne vous laisse pas le temps de regretter ce projectile perdu."]
+    },
+    'Esquive réussie': {
+      openings: ["Vous abandonnez votre position au moment précis où l'arme s'abat", "Votre bassin pivote et vos pieds vous arrachent à la trajectoire", "Vous vous laissez tomber sous la frappe, presque au ras du sol", "Un pas de côté suffit : vous quittez la ligne de mort"],
+      impacts: ["La lame passe dans un souffle à l'endroit où se trouvait votre gorge.", "L'arme ennemie s'écrase contre le sol et fait voler des éclats.", "Le coup ne rencontre que votre manteau, qu'il déchire au passage.", "La frappe traverse l'espace vide et entraîne votre adversaire dans son élan."],
+      reactions: ["Vous retrouvez un angle que votre adversaire ne peut pas immédiatement couvrir.", "L'assaillant doit se retourner pour vous faire face.", "Votre mouvement vous éloigne du danger sans rompre votre vigilance.", "Vous restez mobile, prêt à exploiter l'instant gagné."],
+      endings: ["Le souffle vous revient tandis que l'acier se remet à chanter.", "Vous avez échappé à la frappe d'un cheveu.", "Un pas de plus, et le coup aurait trouvé sa cible."]
+    },
+    'Parade réussie': {
+      openings: ["Vous croisez votre arme devant vous et verrouillez votre garde", "Vous avancez au-devant du coup plutôt que de le subir", "Votre bouclier pivote juste avant l'impact", "Vous accompagnez la frappe adverse pour en détourner la force"],
+      impacts: ["Le choc éclate dans un grondement de métal.", "Les deux armes se heurtent et une vibration remonte le long de vos bras.", "L'attaque glisse sur votre défense dans un crissement aigu.", "Une gerbe d'étincelles jaillit au point de contact."],
+      reactions: ["Votre adversaire doit réarmer son geste tandis que vous tenez votre position.", "Son attaque est déviée et son épaule s'ouvre un instant.", "Vous absorbez la poussée sans laisser vos pieds glisser.", "Le mouvement adverse s'éteint contre votre garde."],
+      endings: ["Vous avez gagné un instant, pas encore la victoire.", "Le fracas résonne entre vous avant que chacun ne retrouve sa garde.", "Vous demeurez face à lui, prêt à répondre au prochain assaut."]
+    },
+    'Défense ratée': {
+      openings: ["Vous levez votre garde trop tard", "Votre parade manque son point d'appui et se désagrège sous l'assaut", "Vous tentez de pivoter, mais votre pied accroche le sol", "La défense se referme mal et laisse une ouverture béante"],
+      impacts: ["L'arme adverse franchit votre garde et vous frappe sans détour.", "Le choc vous percute aux côtes et chasse l'air de vos poumons.", "Une douleur fulgurante éclate au point d'impact.", "Le coup heurte votre protection avec une force qui vous déséquilibre."],
+      reactions: ["Votre corps accuse le choc avant que vous puissiez retrouver vos appuis.", "Votre garde est rompue et l'adversaire reste dangereusement proche.", "Vous devez lutter contre la douleur pour relever votre arme.", "Un instant de confusion vous empêche de lire le mouvement suivant."],
+      endings: ["Le combat continue, mais vous avez perdu le contrôle de cet échange.", "Vous rassemblez vos forces tandis que la menace reste à portée.", "Le prochain mouvement devra être défensif si vous voulez tenir." ]
+    },
+    'Blessure légère': {
+      openings: ["Une pointe trouve le passage entre deux pièces de votre armure", "Le tranchant vous cueille au détour d'un mouvement", "Un éclat ou une lame vous entaille dans la confusion", "Vous sentez une brûlure vive courir sur votre peau"],
+      impacts: ["Une coupure fine perle aussitôt de sang.", "Le tissu se fend et une ligne rouge apparaît sur votre peau.", "La douleur pique, précise, sans vous couper vos moyens.", "Une éraflure cuisante marque votre bras."],
+      reactions: ["Vous serrez les dents et conservez votre prise.", "Votre attention revient aussitôt sur la menace.", "Vous éprouvez la blessure d'un mouvement bref, puis reprenez votre garde.", "La douleur reste présente, mais ne détourne pas votre regard."],
+      endings: ["Ce n'est qu'une entaille ; le combat, lui, ne ralentit pas.", "Le sang est peu abondant, mais la marque restera visible.", "Vous n'avez pas le loisir de vous en occuper maintenant."]
+    },
+    'Blessure sérieuse': {
+      openings: ["Le coup passe votre défense et vous atteint de plein fouet", "Une lame s'enfonce assez profondément pour vous arracher un cri", "L'impact vous prend de côté et vous coupe le souffle", "Votre protection cède sous une frappe particulièrement lourde"],
+      impacts: ["Une plaie profonde s'ouvre et le sang imbibe vos vêtements.", "Une douleur sourde irradie depuis le point d'impact.", "Votre souffle se bloque tandis que vos muscles se contractent.", "La blessure vous arrache un mouvement de recul incontrôlé."],
+      reactions: ["Vous devez réorganiser votre posture pour continuer à tenir votre arme.", "Votre regard se trouble, puis se fixe à nouveau sur l'adversaire.", "Chaque mouvement sollicite désormais la zone blessée.", "Votre corps vous rappelle brutalement le prix de cet échange."],
+      endings: ["La blessure pèsera sur chacun de vos gestes à venir.", "Vous tenez encore, mais la douleur ne vous laissera aucun répit.", "Le combat continue autour de vous comme si rien ne s'était passé."]
+    },
+    'Blessure grave': {
+      openings: ["La frappe vous atteint avec une violence qui vous plie en deux", "Votre corps encaisse un choc terrible au cœur de la mêlée", "L'arme adverse trouve une ouverture et s'y enfonce profondément", "Un impact brutal vous arrache presque le sol sous les pieds"],
+      impacts: ["La douleur vous submerge et votre vision se couvre de taches sombres.", "Le sang s'écoule rapidement le long de votre corps.", "Un craquement sinistre accompagne le choc.", "Vos forces vacillent sous la brutalité de la blessure."],
+      reactions: ["Vous cherchez un appui pour ne pas vous effondrer.", "Votre arme devient soudain lourde dans votre main.", "Vous devez puiser dans vos dernières forces pour rester dans l'affrontement.", "Votre respiration se fait courte et laborieuse."],
+      endings: ["Vous ne pourrez pas ignorer longtemps une blessure pareille.", "Le monde vacille, mais la menace est toujours là.", "Chaque seconde passée debout devient une lutte en soi."]
+    },
+    'Blessure mortelle': {
+      openings: ["Le coup vous atteint avec une précision fatale", "Une douleur blanche vous traverse et efface un instant tout le reste", "La blessure frappe au-delà de ce que votre corps peut endurer", "L'impact vous arrache vos forces d'un seul coup"],
+      impacts: ["Votre souffle se brise dans votre gorge.", "La chaleur du sang se répand sous vos vêtements.", "Vos jambes se dérobent et le monde bascule autour de vous.", "Chaque inspiration devient une lutte désespérée."],
+      reactions: ["Vos doigts s'ouvrent malgré vous et votre arme vous échappe presque.", "Les sons du combat semblent s'éloigner derrière un voile épais.", "Vous luttez pour garder les yeux ouverts.", "Votre corps ne répond plus qu'avec un retard terrible."],
+      endings: ["Tout se joue désormais dans les quelques forces qui vous restent.", "La frontière entre conscience et ténèbres se rapproche.", "Autour de vous, le combat continue sans attendre."]
+    },
+    'Adversaire terrassé': {
+      openings: ["La résistance de votre adversaire finit par se briser", "Un dernier échange lui arrache ses appuis", "Votre ennemi ne parvient plus à soutenir sa garde", "La fatigue et les coups ont finalement raison de lui"],
+      impacts: ["Il s'affaisse contre le sol, son arme glissant hors de portée.", "Ses genoux heurtent la terre avant que son corps ne bascule.", "Il tombe lourdement dans la poussière.", "Sa défense s'effondre et il ne trouve plus la force de se relever."],
+      reactions: ["Sa poitrine se soulève encore, mais il ne représente plus une menace immédiate.", "Il tente de bouger, puis retombe, vidé de ses forces.", "Son regard cherche encore votre silhouette sans parvenir à se fixer.", "Le silence autour de lui contraste avec le tumulte du combat."],
+      endings: ["La victoire de cet échange est acquise ; le champ de bataille, lui, reste vivant.", "Vous pouvez enfin tourner votre attention vers les autres adversaires.", "La poussière retombe sur celui qui vient de céder."]
+    },
+    'Coup fatal': {
+      openings: ["Vous saisissez l'ultime ouverture et portez le coup décisif", "Votre arme suit une trajectoire sans retour", "L'adversaire ne peut plus éviter votre dernière frappe", "Vous rassemblez votre dernier élan dans un geste définitif"],
+      impacts: ["Le coup atteint sa cible et toute résistance s'éteint.", "L'acier frappe avec un bruit mat, puis le corps s'affaisse.", "Son arme tombe avant que ses jambes ne cèdent.", "L'impact met un terme brutal à son mouvement."],
+      reactions: ["Il ne parvient pas à se relever.", "Son regard se perd tandis que son corps devient inerte.", "Un dernier souffle quitte ses lèvres.", "Le mouvement quitte peu à peu ses membres."],
+      endings: ["L'affrontement vient de trouver son terme pour lui.", "Le vacarme reprend autour de vous, indifférent à cette fin.", "Il ne reste qu'un corps immobile là où se tenait votre adversaire."]
+    },
+    'Exécution': {
+      openings: ["Vous vous tenez au-dessus de l'adversaire désarmé", "Votre ennemi ne peut plus opposer la moindre défense", "Vous le regardez une dernière fois avant d'abattre votre arme", "Le temps semble se resserrer autour de votre décision"],
+      impacts: ["Votre geste est bref, précis et sans hésitation.", "L'acier s'abat dans un bruit sourd.", "La lame met fin à ses derniers mouvements.", "Le coup tranche court à toute possibilité de retour."],
+      reactions: ["Son corps retombe et ne bouge plus.", "Un dernier souffle s'échappe avant que le silence ne s'installe.", "La vie quitte son regard.", "Plus aucun mouvement ne vient troubler la scène."],
+      endings: ["Le geste est accompli ; son poids demeure.", "Le champ de bataille ne s'arrête pas pour autant.", "Le silence qui suit ne dure qu'un instant."]
+    },
+    'Dernier souffle': {
+      openings: ["Sa poitrine se soulève dans un effort presque imperceptible", "Ses doigts cherchent une dernière fois à se refermer", "Un souffle râpeux remonte de sa gorge", "Son regard s'attarde sur quelque chose que vous ne voyez pas"],
+      impacts: ["Une inspiration tremblante lui échappe.", "Ses lèvres bougent sans parvenir à former un mot.", "Sa main retombe lentement contre la terre.", "Son souffle s'interrompt au milieu d'une expiration."],
+      reactions: ["Puis son corps s'immobilise.", "Ses yeux cessent de suivre les mouvements autour de lui.", "La tension quitte peu à peu ses traits.", "Il n'y a plus de lutte dans ses membres."],
+      endings: ["Le combat a cessé pour lui.", "Il ne reste que le bruit lointain des armes.", "Un silence bref accompagne cette fin."]
+    }
+  };
+  Object.assign(narrativeEnhancements, {
+    'Aberration': { openings: ["La chose se déplie depuis l'ombre dans un froissement humide", "Une masse difforme se hisse sur des membres qui n'ont pas leur place", "L'aberration tourne vers vous une face qui semble changer à chaque regard"], impacts: ["Sa chair se contracte en vagues sous une peau trop tendue.", "Des appendices fouettent l'air dans un mouvement désordonné.", "Un craquement mou accompagne une torsion impossible de son torse."], reactions: ["Elle avance sans rythme perceptible, comme si elle ignorait la peur.", "Sa présence dérègle vos repères et rend chacun de ses gestes imprévisible.", "Quelque chose remue sous sa peau, à contretemps de ses mouvements."], endings: ["Rien dans cette chose ne rappelle un être vivant ordinaire.", "L'air semble se charger d'une odeur âcre et étrangère."] },
+    'Bête': { openings: ["La bête s'aplatit sur ses pattes, prête à bondir", "L'animal tourne autour de vous en gardant les crocs découverts", "Un grondement profond monte de sa poitrine"], impacts: ["Ses griffes labourent la terre et projettent des mottes derrière elle.", "Ses muscles roulent sous le pelage à chacun de ses pas.", "Sa mâchoire s'ouvre sur une rangée de crocs luisants."], reactions: ["Elle jauge votre moindre mouvement avant de choisir son angle d'attaque.", "Son instinct semble guider chacun de ses déplacements.", "Elle ne vous quitte pas des yeux et attend une faiblesse."], endings: ["Vous sentez la menace animale dans chacun de ses gestes.", "Un faux pas suffirait à déclencher son assaut."] },
+    'Artificiel': { openings: ["L'automate s'éveille dans un déclic métallique", "Une lueur froide s'allume au fond de ses orbites", "La carcasse pivote avec une régularité mécanique"], impacts: ["Des pistons sifflent tandis que ses articulations se verrouillent.", "Des engrenages grincent sous les plaques de métal.", "Une étincelle bleue jaillit d'une jointure puis disparaît."], reactions: ["Il poursuit sa progression sans marquer la moindre hésitation.", "Aucune douleur ni émotion ne semble infléchir son mouvement.", "Sa tête se tourne vers vous avec une précision inquiétante."], endings: ["La machine ne connaît ni fatigue ni doute.", "Seul le rythme de ses mécanismes trouble le silence."] },
+    'Dragon': { openings: ["Le dragon redresse lentement son immense tête", "Ses ailes s'ouvrent et plongent les alentours dans leur ombre", "La créature antique tourne vers vous ses yeux brûlants"], impacts: ["Ses griffes creusent la pierre comme une terre meuble.", "Une haleine brûlante ondule entre ses crocs.", "Ses écailles s'entrechoquent dans un grondement sourd."], reactions: ["Il vous observe avec une intelligence ancienne et terrible.", "Sa masse écrase tout sentiment de sécurité autour de lui.", "Un grondement roule dans sa poitrine avant même qu'il ne bouge."], endings: ["Vous faites face à une puissance qui dépasse de loin celle d'un simple prédateur.", "Le sol tremble sous son poids et l'air devient irrespirable."] },
+    'Mort-vivant': { openings: ["La silhouette morte se redresse avec une lenteur contre nature", "Un cadavre animé traîne ses pas dans votre direction", "La créature relève un visage où la vie s'est éteinte depuis longtemps"], impacts: ["Ses articulations craquent comme des branches sèches.", "Des lambeaux de chair pendent à ses membres.", "Ses doigts osseux se referment et s'ouvrent dans le vide."], reactions: ["Il ne manifeste aucune crainte et ne semble pas sentir la douleur.", "Son regard vide demeure fixé sur vous.", "Il avance malgré les obstacles qui devraient arrêter un vivant."], endings: ["La mort n'a pas suffi à retenir cette chose.", "Une odeur de terre froide accompagne chacun de ses pas."] },
+    'Plante': { openings: ["Les racines frémissent sous la terre avant que la créature ne s'éveille", "Des lianes se déploient lentement autour de son tronc noueux", "Le feuillage se met à bruisser alors qu'aucun vent ne souffle"], impacts: ["Des épines longues comme des dagues jaillissent de ses tiges.", "Ses racines déchirent le sol dans un grondement sourd.", "Une sève sombre perle le long de son écorce."], reactions: ["La plante semble réagir à votre présence plutôt qu'à vos mouvements.", "Ses lianes cherchent à refermer l'espace autour de vous.", "Le feuillage frémit comme une multitude de doigts impatients."], endings: ["La végétation alentour paraît retenir son souffle.", "Une odeur de terre retournée et de sève envahit l'air."] }
+  });
+  for (const [label, additions] of Object.entries(narrativeEnhancements)) {
+    const profile = narrativeProfiles[label];
+    if (!profile) continue;
+    for (const [part, fragments] of Object.entries(additions)) profile[part].push(...fragments);
+  }
+
   const recentFragments = new Map();
   function pickFragment(label, part, fragments) {
     const key = `${label}:${part}`;
